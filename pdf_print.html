@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QR-Code Rätsel-Karten Druckvorlage (PDF)</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: #ffffff;
+      color: #000000;
+      padding: 1.5cm;
+    }
+
+    .header-print {
+      text-align: center;
+      margin-bottom: 2cm;
+      border-bottom: 2px solid #000;
+      padding-bottom: 0.5cm;
+    }
+
+    .header-print h1 { font-size: 24pt; margin-bottom: 0.2cm; }
+    .header-print p { font-size: 11pt; color: #444; }
+
+    .print-btn {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      background: #3b82f6;
+      color: #fff;
+      font-weight: bold;
+      padding: 12px 24px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5cm;
+    }
+
+    .card {
+      border: 2px dashed #333333;
+      border-radius: 12px;
+      padding: 1cm;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      page-break-inside: avoid;
+      background: #fafafa;
+    }
+
+    .card-num {
+      font-size: 10pt;
+      font-weight: bold;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .card-title {
+      font-size: 16pt;
+      font-weight: 800;
+      margin: 0.2cm 0;
+    }
+
+    .card-desc {
+      font-size: 10pt;
+      color: #555;
+      margin-bottom: 0.5cm;
+    }
+
+    .qr-box {
+      background: #ffffff;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin: 0.3cm 0;
+    }
+
+    .qr-box canvas {
+      width: 170px !important;
+      height: 170px !important;
+      display: block;
+    }
+
+    .reward-tag {
+      margin-top: 0.4cm;
+      background: #eee;
+      padding: 4px 12px;
+      border-radius: 4px;
+      font-size: 10pt;
+      font-weight: bold;
+    }
+
+    @media print {
+      body { padding: 0.5cm !important; }
+      .print-btn { display: none !important; }
+      .cards-grid { gap: 1cm !important; }
+      .card { border: 2px dashed #000 !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="print-btn" onclick="window.print()">🖨️ Als PDF speichern / Drucken</button>
+
+  <div class="header-print">
+    <h1>🧩 QR-Code Rätsel-Karten</h1>
+    <p>Scanne die QR-Codes mit dem Handy, um die 5 Rätsel zu lösen und alle Buchstaben zu sammeln!</p>
+  </div>
+
+  <div class="cards-grid" id="printGrid">
+    <!-- QR Cards -->
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script>
+    const baseUrl = 'https://gubifn283.github.io/qr-raetsel-eimer';
+    const puzzles = [
+      { id: 1, name: 'Mathematik', desc: 'Lineare Funktion f(3)' },
+      { id: 2, name: 'Geschichte', desc: 'Der Versailler Vertrag (1919)' },
+      { id: 3, name: 'Englisch', desc: 'Simple Past Grammar' },
+      { id: 4, name: 'Popkultur', desc: 'Guess the Actor' },
+      { id: 5, name: 'Erdkunde', desc: '10 Länder in Europa' }
+    ];
+
+    const grid = document.getElementById('printGrid');
+    puzzles.forEach(p => {
+      const url = `${baseUrl}/?puzzle=${p.id}`;
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <div class="card-num">Rätsel ${p.id} von 5</div>
+        <div class="card-title">${p.name}</div>
+        <div class="card-desc">${p.desc}</div>
+        <div class="qr-box" id="qr-${p.id}"></div>
+        <div class="reward-tag">Gewinn: 🔒 Geheimer Buchstabe</div>
+      `;
+      grid.appendChild(card);
+
+      setTimeout(() => {
+        new QRCode(document.getElementById(`qr-${p.id}`), {
+          text: url,
+          width: 170,
+          height: 170,
+          colorDark: "#000000",
+          colorLight: "#ffffff",
+          correctLevel: QRCode.CorrectLevel.H
+        });
+      }, 100);
+    });
+  </script>
+</body>
+</html>
