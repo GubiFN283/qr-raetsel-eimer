@@ -29,23 +29,23 @@
 
       <!-- Secret Word "E I M E R" Progress -->
       <div class="word-tracker" id="wordTracker">
-        <div class="letter-box" id="box-1" title="Rätsel 1: Mathe (E)">
+        <div class="letter-box" id="box-1" title="Rätsel 1: Mathe">
           <span class="index-badge">1</span>
           <span class="letter-val">?</span>
         </div>
-        <div class="letter-box" id="box-2" title="Rätsel 2: Geschichte (I)">
+        <div class="letter-box" id="box-2" title="Rätsel 2: Geschichte">
           <span class="index-badge">2</span>
           <span class="letter-val">?</span>
         </div>
-        <div class="letter-box" id="box-3" title="Rätsel 3: Englisch (M)">
+        <div class="letter-box" id="box-3" title="Rätsel 3: Englisch">
           <span class="index-badge">3</span>
           <span class="letter-val">?</span>
         </div>
-        <div class="letter-box" id="box-4" title="Rätsel 4: Schauspieler (E)">
+        <div class="letter-box" id="box-4" title="Rätsel 4: Popkultur">
           <span class="index-badge">4</span>
           <span class="letter-val">?</span>
         </div>
-        <div class="letter-box" id="box-5" title="Rätsel 5: Erdkunde (R)">
+        <div class="letter-box" id="box-5" title="Rätsel 5: Erdkunde">
           <span class="index-badge">5</span>
           <span class="letter-val">?</span>
         </div>
@@ -75,7 +75,7 @@
           </button>
         </div>
         <p style="color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.6;">
-          Scanne die folgenden QR-Codes mit deinem Smartphone oder klicke auf eine Karte, um das jeweilige Rätsel aufzurufen. Jedes gelöste Rätsel schaltet einen Buchstaben frei!
+          Scanne die folgenden QR-Codes mit deinem Smartphone oder klicke auf eine Karte, um das jeweilige Rätsel aufzurufen. Erst wenn du ein Rätsel richtig gelöst hast, erhältst du den geheimen Buchstaben!
         </p>
 
         <!-- Smartphone Wi-Fi Configuration Bar -->
@@ -83,13 +83,13 @@
           <div style="display: flex; align-items: center; gap: 0.75rem;">
             <div style="font-size: 1.5rem;">📡</div>
             <div>
-              <strong style="color: #fff; font-size: 0.95rem;">WLAN-Adresse für Smartphones:</strong>
-              <div style="font-size: 0.8rem; color: var(--text-muted);">Damit Handys im selben WLAN die QR-Codes öffnen können:</div>
+              <strong style="color: #fff; font-size: 0.95rem;">Web-Adresse der QR-Codes:</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">Öffentliche Online-URL für Smartphones:</div>
             </div>
           </div>
 
           <div style="display: flex; gap: 0.5rem; flex: 1; max-width: 450px; min-width: 280px;">
-            <input type="text" id="ipAddressInput" class="input-field" value="https://gubifn283.github.io/qr-raetsel-eimer" style="padding: 0.6rem 1rem; font-size: 0.9rem;" placeholder="z.B. https://gubifn283.github.io/qr-raetsel-eimer">
+            <input type="text" id="ipAddressInput" class="input-field" value="https://gubifn283.github.io/qr-raetsel-eimer" style="padding: 0.6rem 1rem; font-size: 0.9rem;" placeholder="Web-Adresse eingeben...">
             <button class="btn btn-primary" id="btnUpdateQR" style="padding: 0.6rem 1.2rem; font-size: 0.85rem; white-space: nowrap;">
               QR-Codes neu laden
             </button>
@@ -101,45 +101,38 @@
         </div>
       </section>
 
-      <!-- VIEW: PUZZLE 1 (MATHE - QUADRATISCHE FUNKTIONEN -> E) -->
+      <!-- VIEW: PUZZLE 1 (MATHE - QUADRATISCHE FUNKTIONEN) -->
       <section id="view-p1" class="view-panel glass-card">
         <div class="puzzle-header">
           <div>
             <div class="puzzle-tag">Rätsel 1 von 5 • Mathematik</div>
-            <h1 class="puzzle-title">📐 Die Wurfparabel & Scheitelpunkt</h1>
+            <h1 class="puzzle-title">📐 Der Höchstpunkt einer Parabel</h1>
           </div>
           <div class="reward-badge">
-            Gewinn: <span class="reward-letter">E</span>
+            Gewinn: <span class="reward-letter">🔒 ?</span>
           </div>
         </div>
 
         <div class="math-container">
           <div>
             <p style="color: var(--text-muted); font-size: 1.05rem; line-height: 1.7; margin-bottom: 1.25rem;">
-              Ein Basketball wird geworfen. Seine Flugbahn lässt sich durch die quadratische Funktion 
-              <strong style="color: #60a5fa; font-size: 1.2rem; display: block; margin: 0.5rem 0;">
-                \( f(x) = -x^2 + 6x - 5 \)
+              Gegeben ist die einfache quadratische Funktion:
+              <strong style="color: #60a5fa; font-size: 1.3rem; display: block; margin: 0.5rem 0;">
+                \( f(x) = -x^2 + 9 \)
               </strong> 
-              beschreiben, wobei \(x\) die horizontale Entfernung und \(f(x)\) die Höhe darstellt.
             </p>
 
             <div style="background: rgba(0,0,0,0.25); padding: 1.2rem; border-radius: var(--radius-md); margin-bottom: 1.5rem; border-left: 4px solid var(--accent-cyan);">
               <h4 style="color: #38bdf8; margin-bottom: 0.5rem;">Aufgabe:</h4>
               <p style="line-height: 1.5;">
-                1. Berechne die <strong>maximale Höhe</strong> (die y-Koordinate des Scheitelpunkts \(S\)).<br>
-                2. Berechne die <strong>Landestelle</strong> (die größere der beiden Nullstellen \(x_2\)).
+                Wie hoch ist der <strong>Höchstpunkt (Scheitelpunkt)</strong> der Parabel auf der y-Achse?
               </p>
             </div>
 
             <form id="formMath" onsubmit="return false;">
               <div class="input-group">
-                <label class="input-label" for="mathY">1. Maximale Höhe \(y_s\):</label>
-                <input type="number" id="mathY" class="input-field" placeholder="Zahl eingeben (z.B. 4)" required>
-              </div>
-
-              <div class="input-group">
-                <label class="input-label" for="mathX">2. Landestelle \(x_2\):</label>
-                <input type="number" id="mathX" class="input-field" placeholder="Zahl eingeben (z.B. 5)" required>
+                <label class="input-label" for="mathY">Höchstpunkt (y-Wert):</label>
+                <input type="number" id="mathY" class="input-field" placeholder="Zahl eingeben..." required>
               </div>
 
               <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">
@@ -152,13 +145,13 @@
 
           <!-- Interactive Math Plotter Canvas -->
           <div class="math-canvas-wrapper">
-            <h4 style="margin-bottom: 0.75rem; color: var(--text-muted); font-size: 0.9rem;">Funktionsgraph \(f(x) = -x^2 + 6x - 5\)</h4>
+            <h4 style="margin-bottom: 0.75rem; color: var(--text-muted); font-size: 0.9rem;">Funktionsgraph \(f(x) = -x^2 + 9\)</h4>
             <canvas id="mathCanvas" width="340" height="260"></canvas>
           </div>
         </div>
       </section>
 
-      <!-- VIEW: PUZZLE 2 (GESCHICHTE - VERSAILLER VERTRAG -> I) -->
+      <!-- VIEW: PUZZLE 2 (GESCHICHTE - VERSAILLER VERTRAG) -->
       <section id="view-p2" class="view-panel glass-card">
         <div class="puzzle-header">
           <div>
@@ -166,34 +159,23 @@
             <h1 class="puzzle-title">📜 Der Versailler Vertrag (1919)</h1>
           </div>
           <div class="reward-badge">
-            Gewinn: <span class="reward-letter">I</span>
+            Gewinn: <span class="reward-letter">🔒 ?</span>
           </div>
         </div>
 
         <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 1.5rem;">
-          Der Friedensvertrag von Versailles besiegelte das Ende des Ersten Weltkriegs. Beantworte die drei historischen Fragen korrekt:
+          Der Friedensvertrag von Versailles besiegelte das Ende des Ersten Weltkriegs. Beantworte die zwei historischen Fragen korrekt:
         </p>
 
         <form id="formHistory" onsubmit="return false;">
           <div class="input-group">
             <label class="input-label">1. In welchem Jahr wurde der Versailler Vertrag unterzeichnet?</label>
-            <input type="number" id="histYear" class="input-field" placeholder="Jahreszahl (z.B. 1919)" required>
+            <input type="number" id="histYear" class="input-field" placeholder="Jahreszahl eingeben..." required>
           </div>
 
           <div class="input-group">
-            <label class="input-label">2. In welchem berühmten Saal des Schlosses von Versailles fand die Unterzeichnung statt?</label>
-            <select id="histHall" class="input-field" required>
-              <option value="">-- Bitte wählen --</option>
-              <option value="marmorsaal">Der Marmorsaal</option>
-              <option value="spiegelsaal">Der Spiegelsaal (Galerie des Glaces)</option>
-              <option value="herkulessaal">Der Herkulessaal</option>
-              <option value="königssaal">Der Königssaal</option>
-            </select>
-          </div>
-
-          <div class="input-group">
-            <label class="input-label">3. Welcher berüchtigte Artikel wies Deutschland die alleinige Kriegsschuld zu?</label>
-            <input type="text" id="histArticle" class="input-field" placeholder="z.B. Artikel 231 oder 231" required>
+            <label class="input-label">2. Welcher berüchtigte Artikel wies Deutschland die alleinige Kriegsschuld zu?</label>
+            <input type="text" id="histArticle" class="input-field" placeholder="Artikelnummer eingeben..." required>
           </div>
 
           <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">
@@ -204,42 +186,40 @@
         <div id="feedbackHistory" class="feedback-box"></div>
       </section>
 
-      <!-- VIEW: PUZZLE 3 (ENGLISCH - TENSES -> M) -->
+      <!-- VIEW: PUZZLE 3 (ENGLISCH - TENSES) -->
       <section id="view-p3" class="view-panel glass-card">
         <div class="puzzle-header">
           <div>
             <div class="puzzle-tag">Rätsel 3 von 5 • Englisch</div>
-            <h1 class="puzzle-title">🇬🇧 English Tenses & Grammar</h1>
+            <h1 class="puzzle-title">🇬🇧 English Simple Past</h1>
           </div>
           <div class="reward-badge">
-            Gewinn: <span class="reward-letter">M</span>
+            Gewinn: <span class="reward-letter">🔒 ?</span>
           </div>
         </div>
 
         <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 1.5rem;">
-          Put the verbs in brackets into the correct tense (Simple Past, Present Perfect, or Past Perfect):
+          Put the verbs in brackets into the Simple Past (Vergangenheit):
         </p>
 
         <form id="formEnglish" onsubmit="return false;">
-          <div style="background: rgba(0,0,0,0.3); padding: 1.5rem; border-radius: var(--radius-md); margin-bottom: 1.5rem; line-height: 2;">
-            Yesterday evening, Tom 
-            <input type="text" id="eng1" class="input-field" style="width: 140px; display: inline-block; padding: 0.4rem 0.8rem;" placeholder="(arrive)" required> 
-            at the cinema. But his friends were not there yet. They 
-            <input type="text" id="eng2" class="input-field" style="width: 160px; display: inline-block; padding: 0.4rem 0.8rem;" placeholder="(miss)" required> 
-            the bus five minutes earlier! Tom has lived in London since 2018, so he 
-            <input type="text" id="eng3" class="input-field" style="width: 150px; display: inline-block; padding: 0.4rem 0.8rem;" placeholder="(see)" required> 
-            many great movies in his life.
+          <div style="background: rgba(0,0,0,0.3); padding: 1.5rem; border-radius: var(--radius-md); margin-bottom: 1.5rem; line-height: 2.2;">
+            Yesterday, Tom 
+            <input type="text" id="eng1" class="input-field" style="width: 140px; display: inline-block; padding: 0.4rem 0.8rem;" placeholder="(go)" required> 
+            to school and 
+            <input type="text" id="eng2" class="input-field" style="width: 150px; display: inline-block; padding: 0.4rem 0.8rem;" placeholder="(play)" required> 
+            football with his friends.
           </div>
 
           <button type="submit" class="btn btn-primary" style="width: 100%;">
-            Check Grammar & Unlock Letter
+            Antwort prüfen & Buchstabe freischalten
           </button>
         </form>
 
         <div id="feedbackEnglish" class="feedback-box"></div>
       </section>
 
-      <!-- VIEW: PUZZLE 4 (ACTOR GUESS - TOM HOLLAND -> E) -->
+      <!-- VIEW: PUZZLE 4 (ACTOR GUESS) -->
       <section id="view-p4" class="view-panel glass-card">
         <div class="puzzle-header">
           <div>
@@ -247,7 +227,7 @@
             <h1 class="puzzle-title">🎬 Guess the Actor!</h1>
           </div>
           <div class="reward-badge">
-            Gewinn: <span class="reward-letter">E</span>
+            Gewinn: <span class="reward-letter">🔒 ?</span>
           </div>
         </div>
 
@@ -275,8 +255,8 @@
           <div class="clue-card">
             <div class="clue-number">3</div>
             <div>
-              <strong style="color: #fff;">Weltberühmter Marvel-Held:</strong>
-              <div style="color: var(--text-muted); font-size: 0.9rem;">Weltweit bekannt als <strong>Spider-Man / Peter Parker</strong> im MCU.</div>
+              <strong style="color: #fff;">Bekannter Anzug-Held:</strong>
+              <div style="color: var(--text-muted); font-size: 0.9rem;">Bekannt für seine akrobatischen Stunts in einem roten Anzug an der Seite von Zendaya.</div>
             </div>
           </div>
 
@@ -284,7 +264,7 @@
             <div class="clue-number">4</div>
             <div>
               <strong style="color: #fff;">Weitere Hits:</strong>
-              <div style="color: var(--text-muted); font-size: 0.9rem;">Verkörperte Nathan Drake in der Videospiel-Verfilmung <em>Uncharted</em>.</div>
+              <div style="color: var(--text-muted); font-size: 0.9rem;">Verkörperte Schatzsucher Nathan Drake im Film <em>Uncharted</em>.</div>
             </div>
           </div>
         </div>
@@ -292,7 +272,7 @@
         <form id="formActor" onsubmit="return false;" style="margin-top: 1.5rem;">
           <div class="input-group">
             <label class="input-label" for="actorName">Wie heißt der Schauspieler? (Vor- und Nachname)</label>
-            <input type="text" id="actorName" class="input-field" placeholder="z.B. Tom Holland" required>
+            <input type="text" id="actorName" class="input-field" placeholder="Name eingeben..." required>
           </div>
 
           <button type="submit" class="btn btn-primary" style="width: 100%;">
@@ -303,7 +283,7 @@
         <div id="feedbackActor" class="feedback-box"></div>
       </section>
 
-      <!-- VIEW: PUZZLE 5 (ERDKUNDE - 10 EUROPA LÄNDER -> R) -->
+      <!-- VIEW: PUZZLE 5 (ERDKUNDE - 10 EUROPA LÄNDER) -->
       <section id="view-p5" class="view-panel glass-card">
         <div class="puzzle-header">
           <div>
@@ -311,16 +291,16 @@
             <h1 class="puzzle-title">🌍 10 Länder in Europa nennen</h1>
           </div>
           <div class="reward-badge">
-            Gewinn: <span class="reward-letter">R</span>
+            Gewinn: <span class="reward-letter">🔒 ?</span>
           </div>
         </div>
 
         <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 1.25rem;">
-          Tippe nacheinander <strong>10 verschiedene europäische Länder</strong> ein. Sobald du 10 gültige Staaten gefunden hast, wird der letzte Buchstabe freigeschaltet!
+          Tippe nacheinander <strong>10 verschiedene europäische Länder</strong> ein. Sobald du 10 gültige Staaten gefunden hast, erhältst du den Buchstaben!
         </p>
 
         <form id="formGeo" onsubmit="return false;" style="display: flex; gap: 0.75rem;">
-          <input type="text" id="geoInput" class="input-field" placeholder="Land eingeben (z.B. Deutschland, Frankreich, Schweden...)" autocomplete="off">
+          <input type="text" id="geoInput" class="input-field" placeholder="Land eingeben..." autocomplete="off">
           <button type="submit" class="btn btn-primary" style="white-space: nowrap;">
             + Hinzufügen
           </button>
