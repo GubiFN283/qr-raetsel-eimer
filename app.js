@@ -1,9 +1,9 @@
 /* ==========================================================================
-   QR-Code Rätsel-Rallye "EIMER" - Application Core Logic
+   QR-Code Rätsel-Rallye "EIMER" - Application Core Logic v2.0
    ========================================================================== */
 
 const SOLUTION_WORD = ['E', 'I', 'M', 'E', 'R'];
-const LOCAL_STORAGE_KEY = 'qr_eimer_progress_v1';
+const LOCAL_STORAGE_KEY = 'qr_eimer_progress_v2';
 
 // European countries dictionary (German & English aliases)
 const EUROPEAN_COUNTRIES = new Set([
@@ -38,7 +38,6 @@ class RiddleApp {
     this.renderQRHub();
     this.handleRouting();
 
-    // Check if victory screen should be shown
     if (this.isFullyCompleted()) {
       const urlParams = new URLSearchParams(window.location.search);
       if (!urlParams.get('puzzle')) {
@@ -68,10 +67,10 @@ class RiddleApp {
 
       if (type === 'success') {
         osc.type = 'triangle';
-        osc.frequency.setValueAtTime(523.25, now); // C5
-        osc.frequency.setValueAtTime(659.25, now + 0.1); // E5
-        osc.frequency.setValueAtTime(783.99, now + 0.2); // G5
-        osc.frequency.setValueAtTime(1046.50, now + 0.3); // C6
+        osc.frequency.setValueAtTime(523.25, now);
+        osc.frequency.setValueAtTime(659.25, now + 0.1);
+        osc.frequency.setValueAtTime(783.99, now + 0.2);
+        osc.frequency.setValueAtTime(1046.50, now + 0.3);
         gain.gain.setValueAtTime(0.3, now);
         gain.gain.exponentialRampToValueAtTime(0.001, now + 0.7);
         osc.start(now);
@@ -97,7 +96,6 @@ class RiddleApp {
     }
   }
 
-  // LocalStorage state management
   loadProgress() {
     try {
       const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
@@ -166,7 +164,6 @@ class RiddleApp {
         valSpan.textContent = '?';
       }
 
-      // Update puzzle page reward badge if open
       const viewPanel = document.getElementById(`view-p${i}`);
       if (viewPanel) {
         const rewardSpan = viewPanel.querySelector('.reward-letter');
@@ -274,63 +271,55 @@ class RiddleApp {
 
   // --- VALIDATION LOGIC ---
 
-  // Puzzle 1: Math (-x^2 + 9)
-  // Max height (y_s) = 9
+  // Puzzle 1: Math Lineare Funktion f(x) = 2x + 4 -> f(3) = 10
   validateMath() {
     const yVal = parseFloat(document.getElementById('mathY').value);
     const fb = document.getElementById('feedbackMath');
 
-    if (yVal === 9) {
+    if (yVal === 10) {
       fb.className = 'feedback-box success';
-      fb.innerHTML = '✅ Richtig! Der Höchstpunkt liegt bei y = 9.';
+      fb.innerHTML = '✅ Richtig! f(3) = 2 · 3 + 4 = 10.';
       this.unlockLetter(1);
     } else {
       this.playSound('error');
       fb.className = 'feedback-box error';
-      fb.innerHTML = '❌ Leider nicht richtig. Tipp: Für x = 0 ist f(0) = -0² + 9 = ?';
+      fb.innerHTML = '❌ Leider nicht richtig. Rechne: 2 · 3 + 4 = ?';
     }
   }
 
-  // Puzzle 2: History (Treaty of Versailles)
+  // Puzzle 2: History (Versailler Vertrag - Einzige Frage)
   validateHistory() {
     const year = document.getElementById('histYear').value.trim();
-    const article = document.getElementById('histArticle').value.trim().toLowerCase();
     const fb = document.getElementById('feedbackHistory');
 
-    const isYearCorrect = year === '1919';
-    const isArticleCorrect = article.includes('231');
-
-    if (isYearCorrect && isArticleCorrect) {
+    if (year === '1919') {
       fb.className = 'feedback-box success';
-      fb.innerHTML = '✅ Hervorragend! 1919 wurde der Vertrag unterzeichnet (Kriegsschuld-Artikel 231).';
+      fb.innerHTML = '✅ Richtig! Der Versailler Vertrag wurde 1919 unterzeichnet.';
       this.unlockLetter(2);
     } else {
       this.playSound('error');
       fb.className = 'feedback-box error';
-      let hints = [];
-      if (!isYearCorrect) hints.push('Das Jahr war 1919.');
-      if (!isArticleCorrect) hints.push('Die Artikelnummer ist 231.');
-      fb.innerHTML = `❌ Einige Antworten stimmen noch nicht. ${hints.join(' ')}`;
+      fb.innerHTML = '❌ Falsches Jahr. Tipp: Das Jahr liegt direkt nach Ende des 1. Weltkriegs (1919).';
     }
   }
 
-  // Puzzle 3: English Simple Past
+  // Puzzle 3: English Simple Past ("went" and "watched")
   validateEnglish() {
     const eng1 = document.getElementById('eng1').value.trim().toLowerCase();
     const eng2 = document.getElementById('eng2').value.trim().toLowerCase();
     const fb = document.getElementById('feedbackEnglish');
 
     const c1 = eng1 === 'went';
-    const c2 = eng2 === 'played';
+    const c2 = eng2 === 'watched';
 
     if (c1 && c2) {
       fb.className = 'feedback-box success';
-      fb.innerHTML = '✅ Excellent! "went" (Simple Past of go) and "played" (Simple Past of play).';
+      fb.innerHTML = '✅ Richtig! "went" (Vergangenheit von go) und "watched" (Vergangenheit von watch).';
       this.unlockLetter(3);
     } else {
       this.playSound('error');
       fb.className = 'feedback-box error';
-      fb.innerHTML = '❌ Not quite right. Simple Past of "go" is "went", Simple Past of "play" is "played".';
+      fb.innerHTML = '❌ Nicht ganz richtig. Simple Past von "go" ist "went", Simple Past von "watch" ist "watched".';
     }
   }
 
@@ -346,7 +335,7 @@ class RiddleApp {
     } else {
       this.playSound('error');
       fb.className = 'feedback-box error';
-      fb.innerHTML = '❌ Falscher Name. Er spielt Billy Elliot und trat an der Seite von Zendaya auf!';
+      fb.innerHTML = '❌ Falscher Name. Er spielte Billy Elliot und Nathan Drake in Uncharted!';
     }
   }
 
@@ -362,7 +351,7 @@ class RiddleApp {
     if (!EUROPEAN_COUNTRIES.has(cleanVal)) {
       this.playSound('error');
       fb.className = 'feedback-box error';
-      fb.innerHTML = `❌ "${rawVal}" liegt nicht in Europa oder ist falsch geschrieben. Try: Deutschland, Italien, Schweden...`;
+      fb.innerHTML = `❌ "${rawVal}" liegt nicht in Europa oder ist falsch geschrieben.`;
       return;
     }
 
@@ -402,7 +391,7 @@ class RiddleApp {
     });
   }
 
-  // Canvas Plotter for Quadratic Function f(x) = -x^2 + 9
+  // Canvas Plotter for Linear Function f(x) = 2x + 4
   renderMathCanvas() {
     const canvas = document.getElementById('mathCanvas');
     if (!canvas) return;
@@ -415,10 +404,10 @@ class RiddleApp {
     ctx.fillStyle = '#0f172a';
     ctx.fillRect(0, 0, width, height);
 
-    const originX = width / 2;
-    const originY = height - 30;
-    const scaleX = 30;
-    const scaleY = 20;
+    const originX = 60;
+    const originY = height - 40;
+    const scaleX = 35;
+    const scaleY = 18;
 
     // Draw Axes
     ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
@@ -439,55 +428,48 @@ class RiddleApp {
     // Grid ticks
     ctx.fillStyle = 'rgba(255,255,255,0.4)';
     ctx.font = '10px sans-serif';
-    for (let x = -4; x <= 4; x++) {
-      if (x === 0) continue;
+    for (let x = 1; x <= 6; x++) {
       const px = originX + x * scaleX;
       ctx.beginPath();
       ctx.moveTo(px, originY - 3);
       ctx.lineTo(px, originY + 3);
       ctx.stroke();
-      ctx.fillText(x, px - 4, originY + 14);
+      ctx.fillText(x, px - 3, originY + 14);
     }
-    for (let y = 3; y <= 9; y += 3) {
+    for (let y = 2; y <= 12; y += 2) {
       const py = originY - y * scaleY;
       ctx.beginPath();
       ctx.moveTo(originX - 3, py);
       ctx.lineTo(originX + 3, py);
       ctx.stroke();
-      ctx.fillText(y, originX + 6, py + 4);
+      ctx.fillText(y, originX - 20, py + 4);
     }
 
-    // Curve f(x) = -x^2 + 9
+    // Straight Line f(x) = 2x + 4
     ctx.strokeStyle = '#38bdf8';
     ctx.lineWidth = 3;
     ctx.beginPath();
 
-    let firstPoint = true;
-    for (let x = -4.5; x <= 4.5; x += 0.05) {
-      const y = -Math.pow(x, 2) + 9;
-      const px = originX + x * scaleX;
-      const py = originY - y * scaleY;
+    const p1x = originX + 0 * scaleX;
+    const p1y = originY - 4 * scaleY;
+    const p2x = originX + 4 * scaleX;
+    const p2y = originY - 12 * scaleY;
 
-      if (firstPoint) {
-        ctx.moveTo(px, py);
-        firstPoint = false;
-      } else {
-        ctx.lineTo(px, py);
-      }
-    }
+    ctx.moveTo(p1x, p1y);
+    ctx.lineTo(p2x, p2y);
     ctx.stroke();
 
-    // Highlight Vertex S(0, 9)
-    const sx = originX;
-    const sy = originY - 9 * scaleY;
+    // Highlight point P(3, 10)
+    const px = originX + 3 * scaleX;
+    const py = originY - 10 * scaleY;
     ctx.fillStyle = '#fbbf24';
     ctx.beginPath();
-    ctx.arc(sx, sy, 6, 0, Math.PI * 2);
+    ctx.arc(px, py, 6, 0, Math.PI * 2);
     ctx.fill();
 
     ctx.fillStyle = '#fbbf24';
     ctx.font = 'bold 12px Outfit, sans-serif';
-    ctx.fillText('S (0 | 9)', sx - 20, sy - 10);
+    ctx.fillText('P (3 | 10)', px - 25, py - 10);
   }
 
   renderQRHub() {
@@ -508,7 +490,7 @@ class RiddleApp {
     baseUrl = baseUrl.replace(/\/$/, '');
 
     const puzzleDetails = [
-      { id: 1, name: 'Mathematik', desc: 'Höchstpunkt einer Parabel', color: '#3b82f6' },
+      { id: 1, name: 'Mathematik', desc: 'Lineare Funktion f(3)', color: '#3b82f6' },
       { id: 2, name: 'Geschichte', desc: 'Versailler Vertrag (1919)', color: '#a855f7' },
       { id: 3, name: 'Englisch', desc: 'Simple Past Grammar', color: '#06b6d4' },
       { id: 4, name: 'Popkultur', desc: 'Guess the Actor', color: '#ec4899' },
