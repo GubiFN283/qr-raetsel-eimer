@@ -394,85 +394,144 @@ class RiddleApp {
     });
   }
 
-  // Canvas Plotter for Linear Function f(x) = 2x + 4
+  // Canvas Plotter for Linear Function f(x) = 2x + 4 (High-Contrast & Crisp)
   renderMathCanvas() {
     const canvas = document.getElementById('mathCanvas');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
 
-    const width = canvas.width;
-    const height = canvas.height;
+    const width = canvas.width; // 600
+    const height = canvas.height; // 380
 
     ctx.clearRect(0, 0, width, height);
+
+    // Dark sleek background
     ctx.fillStyle = '#0f172a';
     ctx.fillRect(0, 0, width, height);
 
-    const originX = 60;
-    const originY = height - 40;
-    const scaleX = 35;
-    const scaleY = 18;
+    // Inner plot area padding
+    const originX = 70;
+    const originY = height - 50;
+    const scaleX = 75; // 1 unit = 75px
+    const scaleY = 25; // 1 unit = 25px
 
-    // Draw Axes
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
-    ctx.lineWidth = 1.5;
+    // 1. Draw Grid Lines (Dashed)
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([4, 4]);
 
-    // X Axis
-    ctx.beginPath();
-    ctx.moveTo(10, originY);
-    ctx.lineTo(width - 10, originY);
-    ctx.stroke();
-
-    // Y Axis
-    ctx.beginPath();
-    ctx.moveTo(originX, 10);
-    ctx.lineTo(originX, height - 10);
-    ctx.stroke();
-
-    // Grid ticks
-    ctx.fillStyle = 'rgba(255,255,255,0.4)';
-    ctx.font = '10px sans-serif';
     for (let x = 1; x <= 6; x++) {
       const px = originX + x * scaleX;
       ctx.beginPath();
-      ctx.moveTo(px, originY - 3);
-      ctx.lineTo(px, originY + 3);
+      ctx.moveTo(px, 20);
+      ctx.lineTo(px, originY);
       ctx.stroke();
-      ctx.fillText(x, px - 3, originY + 14);
     }
     for (let y = 2; y <= 12; y += 2) {
       const py = originY - y * scaleY;
       ctx.beginPath();
-      ctx.moveTo(originX - 3, py);
-      ctx.lineTo(originX + 3, py);
+      ctx.moveTo(originX, py);
+      ctx.lineTo(width - 20, py);
       ctx.stroke();
-      ctx.fillText(y, originX - 20, py + 4);
     }
 
-    // Straight Line f(x) = 2x + 4
+    ctx.setLineDash([]); // Reset dash
+
+    // 2. Draw Main Axes (Solid Cyan)
     ctx.strokeStyle = '#38bdf8';
-    ctx.lineWidth = 3;
+    ctx.lineWidth = 2.5;
+
+    // X Axis
+    ctx.beginPath();
+    ctx.moveTo(30, originY);
+    ctx.lineTo(width - 20, originY);
+    ctx.stroke();
+
+    // X Arrowhead
+    ctx.fillStyle = '#38bdf8';
+    ctx.beginPath();
+    ctx.moveTo(width - 15, originY);
+    ctx.lineTo(width - 25, originY - 6);
+    ctx.lineTo(width - 25, originY + 6);
+    ctx.fill();
+
+    // Y Axis
+    ctx.beginPath();
+    ctx.moveTo(originX, height - 20);
+    ctx.lineTo(originX, 20);
+    ctx.stroke();
+
+    // Y Arrowhead
+    ctx.beginPath();
+    ctx.moveTo(originX, 15);
+    ctx.lineTo(originX - 6, 25);
+    ctx.lineTo(originX + 6, 25);
+    ctx.fill();
+
+    // Axis Names (X & Y)
+    ctx.font = 'bold 16px Outfit, sans-serif';
+    ctx.fillText('x', width - 25, originY + 25);
+    ctx.fillText('y', originX - 25, 25);
+
+    // 3. Draw Axis Tick Numbers (High Contrast White)
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 14px Outfit, sans-serif';
+
+    // X Numbers
+    for (let x = 1; x <= 6; x++) {
+      const px = originX + x * scaleX;
+      ctx.beginPath();
+      ctx.moveTo(px, originY - 4);
+      ctx.lineTo(px, originY + 4);
+      ctx.stroke();
+      ctx.fillText(x.toString(), px - 4, originY + 22);
+    }
+
+    // Y Numbers
+    for (let y = 2; y <= 12; y += 2) {
+      const py = originY - y * scaleY;
+      ctx.beginPath();
+      ctx.moveTo(originX - 4, py);
+      ctx.lineTo(originX + 4, py);
+      ctx.stroke();
+      ctx.fillText(y.toString(), originX - 30, py + 5);
+    }
+
+    // 4. Draw Linear Function Line: f(x) = 2x + 4 (Neon Gold)
+    ctx.strokeStyle = '#fbbf24';
+    ctx.lineWidth = 4;
     ctx.beginPath();
 
     const p1x = originX + 0 * scaleX;
-    const p1y = originY - 4 * scaleY;
-    const p2x = originX + 4 * scaleX;
-    const p2y = originY - 12 * scaleY;
+    const p1y = originY - 4 * scaleY; // (0, 4)
+    const p2x = originX + 4.2 * scaleX;
+    const p2y = originY - (2 * 4.2 + 4) * scaleY; // (4.2, 12.4)
 
     ctx.moveTo(p1x, p1y);
     ctx.lineTo(p2x, p2y);
     ctx.stroke();
 
-    // Highlight point P(3, 10)
-    const px = originX + 3 * scaleX;
-    const py = originY - 10 * scaleY;
-    ctx.fillStyle = '#fbbf24';
+    // 5. Highlight Target Point P(3 | 10)
+    const targetX = 3;
+    const targetY = 10;
+    const px = originX + targetX * scaleX;
+    const py = originY - targetY * scaleY;
+
+    // Glowing target point
+    ctx.fillStyle = '#38bdf8';
     ctx.beginPath();
-    ctx.arc(px, py, 6, 0, Math.PI * 2);
+    ctx.arc(px, py, 9, 0, Math.PI * 2);
     ctx.fill();
 
+    ctx.fillStyle = '#ffffff';
+    ctx.beginPath();
+    ctx.arc(px, py, 5, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Point Badge Label
     ctx.fillStyle = '#fbbf24';
-    ctx.font = 'bold 12px Outfit, sans-serif';
-    ctx.fillText('P (3 | 10)', px - 25, py - 10);
+    ctx.font = 'bold 15px Outfit, sans-serif';
+    ctx.fillText('P (3 | 10)', px - 30, py - 16);
   }
 
   renderQRHub() {
