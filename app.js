@@ -40,7 +40,6 @@ class RiddleApp {
 
     // Check if victory screen should be shown
     if (this.isFullyCompleted()) {
-      // If no specific puzzle is opened in URL, show victory
       const urlParams = new URLSearchParams(window.location.search);
       if (!urlParams.get('puzzle')) {
         this.showView('victory');
@@ -68,7 +67,6 @@ class RiddleApp {
       const now = ctx.currentTime;
 
       if (type === 'success') {
-        // Sparkling chord fanfare
         osc.type = 'triangle';
         osc.frequency.setValueAtTime(523.25, now); // C5
         osc.frequency.setValueAtTime(659.25, now + 0.1); // E5
@@ -79,7 +77,6 @@ class RiddleApp {
         osc.start(now);
         osc.stop(now + 0.7);
       } else if (type === 'error') {
-        // Error buzz
         osc.type = 'sawtooth';
         osc.frequency.setValueAtTime(150, now);
         osc.frequency.linearRampToValueAtTime(100, now + 0.2);
@@ -88,7 +85,6 @@ class RiddleApp {
         osc.start(now);
         osc.stop(now + 0.25);
       } else if (type === 'click') {
-        // Gentle click
         osc.type = 'sine';
         osc.frequency.setValueAtTime(440, now);
         gain.gain.setValueAtTime(0.15, now);
@@ -97,7 +93,7 @@ class RiddleApp {
         osc.stop(now + 0.08);
       }
     } catch (e) {
-      console.log('Audio playback prevented or unsupported:', e);
+      console.log('Audio playback prevented:', e);
     }
   }
 
@@ -115,7 +111,7 @@ class RiddleApp {
     try {
       localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(this.progress));
     } catch (e) {
-      console.error('Failed to save to localStorage', e);
+      console.error('Failed to save progress', e);
     }
   }
 
@@ -126,6 +122,7 @@ class RiddleApp {
       this.saveProgress();
       this.updateHeaderProgress();
       this.renderGeoChips();
+      this.renderQRHub();
       this.showView('hub');
       this.playSound('click');
     }
@@ -168,10 +165,24 @@ class RiddleApp {
         box.classList.remove('unlocked');
         valSpan.textContent = '?';
       }
+
+      // Update puzzle page reward badge if open
+      const viewPanel = document.getElementById(`view-p${i}`);
+      if (viewPanel) {
+        const rewardSpan = viewPanel.querySelector('.reward-letter');
+        if (rewardSpan) {
+          if (this.progress[i]) {
+            rewardSpan.textContent = SOLUTION_WORD[i - 1];
+            rewardSpan.style.background = '#fbbf24';
+            rewardSpan.style.color = '#000';
+          } else {
+            rewardSpan.textContent = '🔒 ?';
+          }
+        }
+      }
     }
   }
 
-  // Routing via URL query parameter (?puzzle=1..5) or view panel ID
   handleRouting() {
     const urlParams = new URLSearchParams(window.location.search);
     const puzzleId = urlParams.get('puzzle');
@@ -196,7 +207,6 @@ class RiddleApp {
     }
   }
 
-  // Setup UI Event Handlers
   setupEventListeners() {
     document.getElementById('navHome').addEventListener('click', () => {
       this.playSound('click');
@@ -262,71 +272,65 @@ class RiddleApp {
     });
   }
 
-  // --- VALIDATION LOGIC FOR THE 5 PUZZLES ---
+  // --- VALIDATION LOGIC ---
 
-  // Puzzle 1: Math (-x^2 + 6x - 5)
-  // Max height (y_s) = 4, Landing point (x_2) = 5
+  // Puzzle 1: Math (-x^2 + 9)
+  // Max height (y_s) = 9
   validateMath() {
     const yVal = parseFloat(document.getElementById('mathY').value);
-    const xVal = parseFloat(document.getElementById('mathX').value);
     const fb = document.getElementById('feedbackMath');
 
-    if (yVal === 4 && xVal === 5) {
+    if (yVal === 9) {
       fb.className = 'feedback-box success';
-      fb.innerHTML = '✅ Richtig! Der Scheitelpunkt liegt bei (3|4) und die Landestelle bei x = 5.';
+      fb.innerHTML = '✅ Richtig! Der Höchstpunkt liegt bei y = 9.';
       this.unlockLetter(1);
     } else {
       this.playSound('error');
       fb.className = 'feedback-box error';
-      fb.innerHTML = '❌ Leider nicht ganz richtig. Tipp: Verwende die Scheitelpunktform oder f(3) für den Höchstpunkt!';
+      fb.innerHTML = '❌ Leider nicht richtig. Tipp: Für x = 0 ist f(0) = -0² + 9 = ?';
     }
   }
 
   // Puzzle 2: History (Treaty of Versailles)
   validateHistory() {
     const year = document.getElementById('histYear').value.trim();
-    const hall = document.getElementById('histHall').value;
     const article = document.getElementById('histArticle').value.trim().toLowerCase();
     const fb = document.getElementById('feedbackHistory');
 
     const isYearCorrect = year === '1919';
-    const isHallCorrect = hall === 'spiegelsaal';
     const isArticleCorrect = article.includes('231');
 
-    if (isYearCorrect && isHallCorrect && isArticleCorrect) {
+    if (isYearCorrect && isArticleCorrect) {
       fb.className = 'feedback-box success';
-      fb.innerHTML = '✅ Hervorragend! 1919 wurde der Vertag im Spiegelsaal unterzeichnet (Artikel 231 kriegsschuld).';
+      fb.innerHTML = '✅ Hervorragend! 1919 wurde der Vertrag unterzeichnet (Kriegsschuld-Artikel 231).';
       this.unlockLetter(2);
     } else {
       this.playSound('error');
       fb.className = 'feedback-box error';
       let hints = [];
-      if (!isYearCorrect) hints.push('Das Jahr war kurz nach Ende des 1. Weltkriegs (1919).');
-      if (!isHallCorrect) hints.push('Der Saal enthält viele Spiegel.');
+      if (!isYearCorrect) hints.push('Das Jahr war 1919.');
       if (!isArticleCorrect) hints.push('Die Artikelnummer ist 231.');
       fb.innerHTML = `❌ Einige Antworten stimmen noch nicht. ${hints.join(' ')}`;
     }
   }
 
-  // Puzzle 3: English Tenses
+  // Puzzle 3: English Simple Past
   validateEnglish() {
     const eng1 = document.getElementById('eng1').value.trim().toLowerCase();
     const eng2 = document.getElementById('eng2').value.trim().toLowerCase();
-    const eng3 = document.getElementById('eng3').value.trim().toLowerCase();
     const fb = document.getElementById('feedbackEnglish');
 
-    const c1 = eng1 === 'arrived';
-    const c2 = eng2 === 'had missed';
-    const c3 = eng3 === 'has seen';
+    const c1 = eng1 === 'went';
+    const c2 = eng2 === 'played';
 
-    if (c1 && c2 && c3) {
+    if (c1 && c2) {
       fb.className = 'feedback-box success';
-      fb.innerHTML = '✅ Excellent! "arrived" (Simple Past), "had missed" (Past Perfect), "has seen" (Present Perfect).';
+      fb.innerHTML = '✅ Excellent! "went" (Simple Past of go) and "played" (Simple Past of play).';
       this.unlockLetter(3);
     } else {
       this.playSound('error');
       fb.className = 'feedback-box error';
-      fb.innerHTML = '❌ Not quite right. Pay attention to Simple Past (arrived), Past Perfect (had missed), and Present Perfect (has seen).';
+      fb.innerHTML = '❌ Not quite right. Simple Past of "go" is "went", Simple Past of "play" is "played".';
     }
   }
 
@@ -337,12 +341,12 @@ class RiddleApp {
 
     if (val.includes('tom holland') || val === 'holland') {
       fb.className = 'feedback-box success';
-      fb.innerHTML = '✅ Richtig! Der Schauspieler ist Tom Holland (Peter Parker / Spider-Man).';
+      fb.innerHTML = '✅ Richtig! Der gesuchte Schauspieler ist Tom Holland.';
       this.unlockLetter(4);
     } else {
       this.playSound('error');
       fb.className = 'feedback-box error';
-      fb.innerHTML = '❌ Falscher Name. Er spielt Spider-Man im Marvel Cinematic Universe!';
+      fb.innerHTML = '❌ Falscher Name. Er spielt Billy Elliot und trat an der Seite von Zendaya auf!';
     }
   }
 
@@ -358,7 +362,7 @@ class RiddleApp {
     if (!EUROPEAN_COUNTRIES.has(cleanVal)) {
       this.playSound('error');
       fb.className = 'feedback-box error';
-      fb.innerHTML = `❌ "${rawVal}" liegt nicht in Europa oder ist fehlerhaft geschrieben. Try: Deutschland, Italien, Schweden...`;
+      fb.innerHTML = `❌ "${rawVal}" liegt nicht in Europa oder ist falsch geschrieben. Try: Deutschland, Italien, Schweden...`;
       return;
     }
 
@@ -398,7 +402,7 @@ class RiddleApp {
     });
   }
 
-  // Interactive HTML5 Canvas Plotter for Quadratic Function
+  // Canvas Plotter for Quadratic Function f(x) = -x^2 + 9
   renderMathCanvas() {
     const canvas = document.getElementById('mathCanvas');
     if (!canvas) return;
@@ -407,16 +411,14 @@ class RiddleApp {
     const width = canvas.width;
     const height = canvas.height;
 
-    // Clear background
     ctx.clearRect(0, 0, width, height);
     ctx.fillStyle = '#0f172a';
     ctx.fillRect(0, 0, width, height);
 
-    // Coordinate System Setup
-    const originX = 50;
-    const originY = height - 40;
-    const scaleX = 35; // 1 unit = 35px
-    const scaleY = 35; // 1 unit = 35px
+    const originX = width / 2;
+    const originY = height - 30;
+    const scaleX = 30;
+    const scaleY = 20;
 
     // Draw Axes
     ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
@@ -437,31 +439,32 @@ class RiddleApp {
     // Grid ticks
     ctx.fillStyle = 'rgba(255,255,255,0.4)';
     ctx.font = '10px sans-serif';
-    for (let x = 1; x <= 7; x++) {
+    for (let x = -4; x <= 4; x++) {
+      if (x === 0) continue;
       const px = originX + x * scaleX;
       ctx.beginPath();
       ctx.moveTo(px, originY - 3);
       ctx.lineTo(px, originY + 3);
       ctx.stroke();
-      ctx.fillText(x, px - 3, originY + 16);
+      ctx.fillText(x, px - 4, originY + 14);
     }
-    for (let y = 1; y <= 5; y++) {
+    for (let y = 3; y <= 9; y += 3) {
       const py = originY - y * scaleY;
       ctx.beginPath();
       ctx.moveTo(originX - 3, py);
       ctx.lineTo(originX + 3, py);
       ctx.stroke();
-      ctx.fillText(y, originX - 18, py + 4);
+      ctx.fillText(y, originX + 6, py + 4);
     }
 
-    // Draw Curve f(x) = -x^2 + 6x - 5
+    // Curve f(x) = -x^2 + 9
     ctx.strokeStyle = '#38bdf8';
     ctx.lineWidth = 3;
     ctx.beginPath();
 
     let firstPoint = true;
-    for (let x = 0; x <= 6.5; x += 0.05) {
-      const y = -Math.pow(x, 2) + 6 * x - 5;
+    for (let x = -4.5; x <= 4.5; x += 0.05) {
+      const y = -Math.pow(x, 2) + 9;
       const px = originX + x * scaleX;
       const py = originY - y * scaleY;
 
@@ -474,9 +477,9 @@ class RiddleApp {
     }
     ctx.stroke();
 
-    // Highlight Vertex S(3, 4)
-    const sx = originX + 3 * scaleX;
-    const sy = originY - 4 * scaleY;
+    // Highlight Vertex S(0, 9)
+    const sx = originX;
+    const sy = originY - 9 * scaleY;
     ctx.fillStyle = '#fbbf24';
     ctx.beginPath();
     ctx.arc(sx, sy, 6, 0, Math.PI * 2);
@@ -484,10 +487,9 @@ class RiddleApp {
 
     ctx.fillStyle = '#fbbf24';
     ctx.font = 'bold 12px Outfit, sans-serif';
-    ctx.fillText('S (3 | 4)', sx - 20, sy - 12);
+    ctx.fillText('S (0 | 9)', sx - 20, sy - 10);
   }
 
-  // Render QR Codes into the Hub view
   renderQRHub() {
     const grid = document.getElementById('qrGrid');
     if (!grid) return;
@@ -503,21 +505,22 @@ class RiddleApp {
       }
     }
 
-    // Ensure baseUrl has no trailing slash before params
     baseUrl = baseUrl.replace(/\/$/, '');
 
     const puzzleDetails = [
-      { id: 1, name: 'Mathematik', desc: 'Quadratische Funktionen', letter: 'E', color: '#3b82f6' },
-      { id: 2, name: 'Geschichte', desc: 'Versailler Vertrag (1919)', letter: 'I', color: '#a855f7' },
-      { id: 3, name: 'Englisch', desc: 'Grammatik & Zeitformen', letter: 'M', color: '#06b6d4' },
-      { id: 4, name: 'Popkultur', desc: 'Guess the Actor (Tom Holland)', letter: 'E', color: '#ec4899' },
-      { id: 5, name: 'Erdkunde', desc: '10 Länder in Europa', letter: 'R', color: '#10b981' }
+      { id: 1, name: 'Mathematik', desc: 'Höchstpunkt einer Parabel', color: '#3b82f6' },
+      { id: 2, name: 'Geschichte', desc: 'Versailler Vertrag (1919)', color: '#a855f7' },
+      { id: 3, name: 'Englisch', desc: 'Simple Past Grammar', color: '#06b6d4' },
+      { id: 4, name: 'Popkultur', desc: 'Guess the Actor', color: '#ec4899' },
+      { id: 5, name: 'Erdkunde', desc: '10 Länder in Europa', color: '#10b981' }
     ];
 
     puzzleDetails.forEach(p => {
       const card = document.createElement('div');
       card.className = 'qr-card';
       const puzzleUrl = `${baseUrl}/?puzzle=${p.id}`;
+      const isUnlocked = this.progress[p.id];
+      const letterDisplay = isUnlocked ? `Gewinn: ${SOLUTION_WORD[p.id - 1]}` : `Gewinn: 🔒 Geheimer Buchstabe`;
 
       card.innerHTML = `
         <div class="qr-puzzle-num">Rätsel ${p.id} von 5</div>
@@ -525,9 +528,9 @@ class RiddleApp {
         <div style="font-size: 0.85rem; color: var(--text-muted);">${p.desc}</div>
         <div class="qr-canvas-wrapper" id="qrcode-container-${p.id}"></div>
         <div style="font-size: 0.7rem; color: var(--text-dim); font-family: monospace; word-break: break-all; margin-bottom: 0.5rem;">${puzzleUrl}</div>
-        <div class="qr-letter-tag">Gewinn: ${p.letter}</div>
+        <div class="qr-letter-tag">${letterDisplay}</div>
         <button class="btn btn-glass" style="margin-top: 1rem; width: 100%; font-size: 0.85rem;">
-          ▶️ Rätsel ${p.id} auf diesem PC öffnen
+          ▶️ Rätsel ${p.id} öffnen
         </button>
       `;
 
@@ -538,7 +541,6 @@ class RiddleApp {
 
       grid.appendChild(card);
 
-      // Render QRCode inside container
       setTimeout(() => {
         const container = document.getElementById(`qrcode-container-${p.id}`);
         if (container) {
@@ -553,7 +555,6 @@ class RiddleApp {
               correctLevel: QRCode.CorrectLevel.H
             });
           } else {
-            // Fallback text if script fails
             container.innerHTML = `<div style="padding: 1rem; font-size: 0.8rem; color: #000;">${puzzleUrl}</div>`;
           }
         }
@@ -561,7 +562,6 @@ class RiddleApp {
     });
   }
 
-  // Modals & Celebrations
   showModal(letter, puzzleIndex) {
     document.getElementById('modalLetter').textContent = letter;
     document.getElementById('modalPuzzleNum').textContent = `Buchstabe ${puzzleIndex} von 5 freigeschaltet`;
@@ -583,7 +583,6 @@ class RiddleApp {
   }
 }
 
-// Initialize application on DOM content loaded
 document.addEventListener('DOMContentLoaded', () => {
   window.app = new RiddleApp();
 });
