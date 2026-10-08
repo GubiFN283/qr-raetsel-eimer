@@ -215,9 +215,12 @@ class RiddleApp {
       this.showView('hub');
     });
 
-    document.getElementById('btnReset').addEventListener('click', () => {
-      this.resetProgress();
-    });
+    const btnReset = document.getElementById('btnReset');
+    if (btnReset) {
+      btnReset.addEventListener('click', () => {
+        this.resetProgress();
+      });
+    }
 
     const btnUpdateQR = document.getElementById('btnUpdateQR');
     if (btnUpdateQR) {
