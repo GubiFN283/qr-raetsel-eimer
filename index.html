@@ -8,7 +8,7 @@
   <meta http-equiv="Expires" content="0">
   <title>QR-Code Rätsel-Rallye | Lösungswort EIMER</title>
   <meta name="description" content="Löse 5 knifflige Rätsel über QR-Codes und finde das geheime Lösungswort EIMER!">
-  <link rel="stylesheet" href="style.css?v=3.0">
+  <link rel="stylesheet" href="style.css?v=4.0">
 </head>
 <body>
 
@@ -16,7 +16,6 @@
   <div class="bg-blobs">
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
-    <div class="blob blob-3"></div>
   </div>
 
   <div id="app">
@@ -120,21 +119,21 @@
           <div>
             <p style="color: var(--text-muted); font-size: 1.05rem; line-height: 1.7; margin-bottom: 1.25rem;">
               Gegeben ist die einfache lineare Funktion:
-              <strong style="color: #60a5fa; font-size: 1.4rem; display: block; margin: 0.5rem 0;">
-                \( f(x) = 2x + 4 \)
+              <strong style="color: #60a5fa; font-size: 1.5rem; display: block; margin: 0.5rem 0;">
+                f(x) = 2x + 4
               </strong> 
             </p>
 
             <div style="background: rgba(0,0,0,0.25); padding: 1.2rem; border-radius: var(--radius-md); margin-bottom: 1.5rem; border-left: 4px solid var(--accent-cyan);">
               <h4 style="color: #38bdf8; margin-bottom: 0.5rem;">Aufgabe:</h4>
               <p style="line-height: 1.5;">
-                Setze \(x = 3\) in die Funktion ein und berechne den Funktionswert \(f(3)\).
+                Setze x = 3 in die Funktion ein und berechne den Funktionswert f(3).
               </p>
             </div>
 
             <form id="formMath" onsubmit="return false;">
               <div class="input-group">
-                <label class="input-label" for="mathY">Ergebnis für \(f(3)\):</label>
+                <label class="input-label" for="mathY">Ergebnis für f(3):</label>
                 <input type="number" id="mathY" class="input-field" placeholder="Ergebnis eingeben..." required>
               </div>
 
@@ -148,13 +147,13 @@
 
           <!-- Interactive Math Plotter Canvas -->
           <div class="math-canvas-wrapper">
-            <h4 style="margin-bottom: 0.75rem; color: var(--text-muted); font-size: 0.9rem;">Funktionsgraph \(f(x) = 2x + 4\)</h4>
+            <h4 style="margin-bottom: 0.75rem; color: var(--text-muted); font-size: 0.9rem;">Funktionsgraph f(x) = 2x + 4</h4>
             <canvas id="mathCanvas" width="340" height="260"></canvas>
           </div>
         </div>
       </section>
 
-      <!-- VIEW: PUZZLE 2 (GESCHICHTE - VERSAILLER VERTRAG EINZIGE FRAGE) -->
+      <!-- VIEW: PUZZLE 2 (GESCHICHTE) -->
       <section id="view-p2" class="view-panel glass-card">
         <div class="puzzle-header">
           <div>
@@ -184,7 +183,7 @@
         <div id="feedbackHistory" class="feedback-box"></div>
       </section>
 
-      <!-- VIEW: PUZZLE 3 (ENGLISCH - KLARER & EINFACHER TEXT) -->
+      <!-- VIEW: PUZZLE 3 (ENGLISCH) -->
       <section id="view-p3" class="view-panel glass-card">
         <div class="puzzle-header">
           <div>
@@ -217,7 +216,7 @@
         <div id="feedbackEnglish" class="feedback-box"></div>
       </section>
 
-      <!-- VIEW: PUZZLE 4 (ACTOR GUESS - KNIFFLIGER 3. TIPP) -->
+      <!-- VIEW: PUZZLE 4 (ACTOR GUESS) -->
       <section id="view-p4" class="view-panel glass-card">
         <div class="puzzle-header">
           <div>
@@ -381,6 +380,6 @@
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
   <!-- Main Application Logic -->
-  <script src="app.js?v=3.0"></script>
+  <script src="app.js?v=4.0"></script>
 </body>
 </html>
