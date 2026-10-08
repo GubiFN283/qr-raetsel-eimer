@@ -2,13 +2,13 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
   <title>QR-Code Rätsel-Rallye | Lösungswort EIMER</title>
   <meta name="description" content="Löse 5 knifflige Rätsel über QR-Codes und finde das geheime Lösungswort EIMER!">
-  <link rel="stylesheet" href="style.css?v=4.0">
+  <link rel="stylesheet" href="style.css?v=5.0">
 </head>
 <body>
 
@@ -24,8 +24,8 @@
       <div class="brand-container" id="navHome">
         <div class="brand-icon">🧩</div>
         <div>
-          <div class="brand-title">QR-Rätsel Rallye</div>
-          <div style="font-size: 0.75rem; color: var(--text-muted);">Sammle die 5 Buchstaben!</div>
+          <div class="brand-title">QR-Rätsel</div>
+          <div style="font-size: 0.7rem; color: var(--text-muted);">Lösungswort: EIMER</div>
         </div>
       </div>
 
@@ -55,11 +55,8 @@
 
       <!-- Action Buttons -->
       <div class="nav-buttons">
-        <button class="btn btn-glass" id="btnShowHub">
-          📱 QR-Codes Hub
-        </button>
-        <button class="btn btn-glass" id="btnReset" style="padding: 0.7rem;" title="Fortschritt zurücksetzen">
-          🔄
+        <button class="btn btn-glass" id="btnShowHub" style="padding: 0.5rem 0.8rem; font-size: 0.8rem;">
+          📱 QR Hub
         </button>
       </div>
     </header>
@@ -81,19 +78,18 @@
         </p>
 
         <!-- Smartphone Wi-Fi Configuration Bar -->
-        <div style="background: rgba(99, 102, 241, 0.12); border: 1px solid var(--accent-indigo); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 2rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;">
-          <div style="display: flex; align-items: center; gap: 0.75rem;">
-            <div style="font-size: 1.5rem;">📡</div>
+        <div style="background: rgba(99, 102, 241, 0.12); border: 1px solid var(--accent-indigo); border-radius: var(--radius-lg); padding: 1rem; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; flex-wrap: wrap;">
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <div style="font-size: 1.3rem;">📡</div>
             <div>
-              <strong style="color: #fff; font-size: 0.95rem;">Web-Adresse der QR-Codes:</strong>
-              <div style="font-size: 0.8rem; color: var(--text-muted);">Öffentliche Online-URL für Smartphones:</div>
+              <strong style="color: #fff; font-size: 0.85rem;">Web-Adresse der QR-Codes:</strong>
             </div>
           </div>
 
-          <div style="display: flex; gap: 0.5rem; flex: 1; max-width: 450px; min-width: 280px;">
-            <input type="text" id="ipAddressInput" class="input-field" value="https://gubifn283.github.io/qr-raetsel-eimer" style="padding: 0.6rem 1rem; font-size: 0.9rem;" placeholder="Web-Adresse eingeben...">
-            <button class="btn btn-primary" id="btnUpdateQR" style="padding: 0.6rem 1.2rem; font-size: 0.85rem; white-space: nowrap;">
-              QR-Codes neu laden
+          <div style="display: flex; gap: 0.4rem; width: 100%;">
+            <input type="text" id="ipAddressInput" class="input-field" value="https://gubifn283.github.io/qr-raetsel-eimer" style="padding: 0.5rem 0.8rem; font-size: 0.85rem;" placeholder="Web-Adresse eingeben...">
+            <button class="btn btn-primary" id="btnUpdateQR" style="padding: 0.5rem 0.8rem; font-size: 0.8rem; white-space: nowrap;">
+              Neu laden
             </button>
           </div>
         </div>
@@ -117,16 +113,16 @@
 
         <div class="math-container">
           <div>
-            <p style="color: var(--text-muted); font-size: 1.05rem; line-height: 1.7; margin-bottom: 1.25rem;">
+            <p style="color: var(--text-muted); font-size: 1rem; line-height: 1.6; margin-bottom: 1rem;">
               Gegeben ist die einfache lineare Funktion:
-              <strong style="color: #60a5fa; font-size: 1.5rem; display: block; margin: 0.5rem 0;">
+              <strong style="color: #60a5fa; font-size: 1.3rem; display: block; margin: 0.4rem 0;">
                 f(x) = 2x + 4
               </strong> 
             </p>
 
-            <div style="background: rgba(0,0,0,0.25); padding: 1.2rem; border-radius: var(--radius-md); margin-bottom: 1.5rem; border-left: 4px solid var(--accent-cyan);">
-              <h4 style="color: #38bdf8; margin-bottom: 0.5rem;">Aufgabe:</h4>
-              <p style="line-height: 1.5;">
+            <div style="background: rgba(0,0,0,0.25); padding: 1rem; border-radius: var(--radius-md); margin-bottom: 1.25rem; border-left: 4px solid var(--accent-cyan);">
+              <h4 style="color: #38bdf8; margin-bottom: 0.4rem; font-size: 0.95rem;">Aufgabe:</h4>
+              <p style="line-height: 1.5; font-size: 0.9rem;">
                 Setze x = 3 in die Funktion ein und berechne den Funktionswert f(3).
               </p>
             </div>
@@ -147,8 +143,8 @@
 
           <!-- Interactive Math Plotter Canvas -->
           <div class="math-canvas-wrapper">
-            <h4 style="margin-bottom: 0.75rem; color: var(--text-muted); font-size: 0.9rem;">Funktionsgraph f(x) = 2x + 4</h4>
-            <canvas id="mathCanvas" width="340" height="260"></canvas>
+            <h4 style="margin-bottom: 0.5rem; color: var(--text-muted); font-size: 0.85rem;">Funktionsgraph f(x) = 2x + 4</h4>
+            <canvas id="mathCanvas" width="280" height="220"></canvas>
           </div>
         </div>
       </section>
@@ -165,7 +161,7 @@
           </div>
         </div>
 
-        <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 1.5rem;">
+        <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 1.25rem;">
           Der Friedensvertrag von Versailles beendete den Ersten Weltkrieg. Beantworte die historische Frage:
         </p>
 
@@ -195,16 +191,16 @@
           </div>
         </div>
 
-        <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 1.5rem;">
+        <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 1.25rem;">
           Setze die beiden Verben in Klammern in die Vergangenheit (Simple Past):
         </p>
 
         <form id="formEnglish" onsubmit="return false;">
-          <div style="background: rgba(0,0,0,0.3); padding: 1.5rem; border-radius: var(--radius-md); margin-bottom: 1.5rem; line-height: 2.2; font-size: 1.1rem;">
+          <div style="background: rgba(0,0,0,0.3); padding: 1.25rem; border-radius: var(--radius-md); margin-bottom: 1.25rem; line-height: 2.2; font-size: 1rem;">
             Yesterday, Tom 
-            <input type="text" id="eng1" class="input-field" style="width: 130px; display: inline-block; padding: 0.4rem 0.8rem;" placeholder="(go)" required> 
+            <input type="text" id="eng1" class="input-field" style="width: 110px; display: inline-block; padding: 0.35rem 0.6rem; font-size: 0.95rem;" placeholder="(go)" required> 
             to the cinema and 
-            <input type="text" id="eng2" class="input-field" style="width: 150px; display: inline-block; padding: 0.4rem 0.8rem;" placeholder="(watch)" required> 
+            <input type="text" id="eng2" class="input-field" style="width: 130px; display: inline-block; padding: 0.35rem 0.6rem; font-size: 0.95rem;" placeholder="(watch)" required> 
             a movie.
           </div>
 
@@ -228,7 +224,7 @@
           </div>
         </div>
 
-        <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 1rem;">
+        <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 1rem;">
           Wer ist dieser berühmte Hollywood-Schauspieler? Lies die 4 Hinweise:
         </p>
 
@@ -236,37 +232,37 @@
           <div class="clue-card">
             <div class="clue-number">1</div>
             <div>
-              <strong style="color: #fff;">Geburtsort & Jahr:</strong>
-              <div style="color: var(--text-muted); font-size: 0.9rem;">Geboren 1996 in Kingston upon Thames, England.</div>
+              <strong style="color: #fff; font-size: 0.9rem;">Geburtsort & Jahr:</strong>
+              <div style="color: var(--text-muted); font-size: 0.85rem;">Geboren 1996 in Kingston upon Thames, England.</div>
             </div>
           </div>
 
           <div class="clue-card">
             <div class="clue-number">2</div>
             <div>
-              <strong style="color: #fff;">Erste große Rolle:</strong>
-              <div style="color: var(--text-muted); font-size: 0.9rem;">Spielte als Teenager die Hauptrolle im Musical <em>Billy Elliot</em> im Londoner West End.</div>
+              <strong style="color: #fff; font-size: 0.9rem;">Erste große Rolle:</strong>
+              <div style="color: var(--text-muted); font-size: 0.85rem;">Spielte als Teenager die Hauptrolle im Musical <em>Billy Elliot</em> im Londoner West End.</div>
             </div>
           </div>
 
           <div class="clue-card">
             <div class="clue-number">3</div>
             <div>
-              <strong style="color: #fff;">Spektakuläre Bewerbung:</strong>
-              <div style="color: var(--text-muted); font-size: 0.9rem;">Reichte 2015 ein Selbst-Video mit Akrobatik-Saltos ein, um Regisseure für eine geheime Rolle zu überzeugen.</div>
+              <strong style="color: #fff; font-size: 0.9rem;">Spektakuläre Bewerbung:</strong>
+              <div style="color: var(--text-muted); font-size: 0.85rem;">Reichte 2015 ein Selbst-Video mit Akrobatik-Saltos ein, um Regisseure für eine geheime Rolle zu überzeugen.</div>
             </div>
           </div>
 
           <div class="clue-card">
             <div class="clue-number">4</div>
             <div>
-              <strong style="color: #fff;">Bekannter Kinofilm:</strong>
-              <div style="color: var(--text-muted); font-size: 0.9rem;">Verkörperte den jungen Schatzsucher Nathan Drake im Actionfilm <em>Uncharted</em>.</div>
+              <strong style="color: #fff; font-size: 0.9rem;">Bekannter Kinofilm:</strong>
+              <div style="color: var(--text-muted); font-size: 0.85rem;">Verkörperte den jungen Schatzsucher Nathan Drake im Actionfilm <em>Uncharted</em>.</div>
             </div>
           </div>
         </div>
 
-        <form id="formActor" onsubmit="return false;" style="margin-top: 1.5rem;">
+        <form id="formActor" onsubmit="return false;" style="margin-top: 1.25rem;">
           <div class="input-group">
             <label class="input-label" for="actorName">Wie heißt der Schauspieler? (Vor- und Nachname)</label>
             <input type="text" id="actorName" class="input-field" placeholder="Name eingeben..." required>
@@ -292,22 +288,22 @@
           </div>
         </div>
 
-        <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 1.25rem;">
+        <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 1rem;">
           Tippe nacheinander <strong>10 verschiedene europäische Länder</strong> ein. Sobald du 10 gültige Staaten gefunden hast, erhältst du den Buchstaben!
         </p>
 
-        <form id="formGeo" onsubmit="return false;" style="display: flex; gap: 0.75rem;">
+        <form id="formGeo" onsubmit="return false;" style="display: flex; gap: 0.5rem;">
           <input type="text" id="geoInput" class="input-field" placeholder="Land eingeben..." autocomplete="off">
-          <button type="submit" class="btn btn-primary" style="white-space: nowrap;">
+          <button type="submit" class="btn btn-primary" style="white-space: nowrap; padding: 0.75rem 1rem;">
             + Hinzufügen
           </button>
         </form>
 
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem;">
-          <div style="font-weight: 700; color: var(--text-muted);" id="countryCountText">
-            Gefundene Länder: <span id="geoCount" style="color: var(--accent-cyan); font-size: 1.2rem;">0</span> / 10
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.25rem;">
+          <div style="font-weight: 700; color: var(--text-muted); font-size: 0.9rem;" id="countryCountText">
+            Gefundene Länder: <span id="geoCount" style="color: var(--accent-cyan); font-size: 1.1rem;">0</span> / 10
           </div>
-          <button class="btn btn-glass" id="btnClearGeo" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;">
+          <button class="btn btn-glass" id="btnClearGeo" style="padding: 0.35rem 0.7rem; font-size: 0.75rem;">
             Zurücksetzen
           </button>
         </div>
@@ -320,25 +316,25 @@
       </section>
 
       <!-- VIEW: GRAND VICTORY / SOLUTION UNLOCKED -->
-      <section id="view-victory" class="view-panel glass-card" style="text-align: center; padding: 4rem 2rem;">
-        <div style="font-size: 5rem; margin-bottom: 1rem;">🎉🏆✨</div>
-        <h1 style="font-family: var(--font-heading); font-size: 3rem; font-weight: 900; background: linear-gradient(135deg, #fbbf24, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+      <section id="view-victory" class="view-panel glass-card" style="text-align: center; padding: 3rem 1.5rem;">
+        <div style="font-size: 4rem; margin-bottom: 0.75rem;">🎉🏆✨</div>
+        <h1 style="font-family: var(--font-heading); font-size: 2.2rem; font-weight: 900; background: linear-gradient(135deg, #fbbf24, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
           HERZLICHEN GLÜCKWUNSCH!
         </h1>
-        <p style="color: var(--text-muted); font-size: 1.2rem; margin: 1rem 0 2rem 0;">
+        <p style="color: var(--text-muted); font-size: 1.05rem; margin: 0.75rem 0 1.5rem 0;">
           Du hast alle 5 Rätsel erfolgreich gelöst und alle Buchstaben gesammelt!
         </p>
 
-        <div style="background: rgba(0,0,0,0.4); border: 2px solid var(--accent-amber); border-radius: var(--radius-xl); padding: 2.5rem; display: inline-block; max-width: 450px; width: 100%; box-shadow: 0 0 40px rgba(245, 158, 11, 0.3);">
-          <div style="text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-amber); font-size: 0.9rem; font-weight: 700; margin-bottom: 0.5rem;">
+        <div style="background: rgba(0,0,0,0.4); border: 2px solid var(--accent-amber); border-radius: var(--radius-xl); padding: 1.75rem 1.25rem; display: inline-block; max-width: 100%; width: 100%;">
+          <div style="text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-amber); font-size: 0.8rem; font-weight: 700; margin-bottom: 0.4rem;">
             Das gesuchte Lösungswort lautet:
           </div>
-          <div style="font-family: var(--font-heading); font-size: 4.5rem; font-weight: 900; color: #ffffff; letter-spacing: 0.25em; text-shadow: 0 0 20px rgba(255,255,255,0.6);">
+          <div style="font-family: var(--font-heading); font-size: 3.2rem; font-weight: 900; color: #ffffff; letter-spacing: 0.2em;">
             EIMER
           </div>
         </div>
 
-        <div style="margin-top: 3rem;">
+        <div style="margin-top: 2rem;">
           <button class="btn btn-primary" onclick="app.showView('hub')">
             📱 Zurück zur QR-Code Übersicht
           </button>
@@ -347,7 +343,7 @@
     </main>
 
     <footer>
-      QR-Code Rätsel-Rallye • Erstellt für das Lösungswort "EIMER"
+      QR-Code Rätsel-Rallye • Lösungswort "EIMER"
     </footer>
   </div>
 
@@ -355,16 +351,16 @@
   <div class="modal-overlay" id="unlockModal">
     <div class="modal-content">
       <div class="unlock-sparkle">⭐</div>
-      <h2 style="font-family: var(--font-heading); font-size: 1.8rem; font-weight: 800; color: #fff;">
+      <h2 style="font-family: var(--font-heading); font-size: 1.6rem; font-weight: 800; color: #fff;">
         RÄTSEL GELÖST!
       </h2>
-      <p style="color: var(--text-muted); margin-top: 0.5rem;">
+      <p style="color: var(--text-muted); margin-top: 0.4rem; font-size: 0.9rem;">
         Du hast folgenden Buchstaben freigeschaltet:
       </p>
 
       <div class="unlocked-letter-giant" id="modalLetter">E</div>
 
-      <div style="color: #6ee7b7; font-weight: 600; font-size: 0.95rem; margin-bottom: 1.5rem;" id="modalPuzzleNum">
+      <div style="color: #6ee7b7; font-weight: 600; font-size: 0.9rem; margin-bottom: 1.25rem;" id="modalPuzzleNum">
         Buchstabe 1 von 5 gesammelt
       </div>
 
@@ -380,6 +376,6 @@
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
   <!-- Main Application Logic -->
-  <script src="app.js?v=4.0"></script>
+  <script src="app.js?v=5.0"></script>
 </body>
 </html>
