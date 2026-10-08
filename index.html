@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QR-Code Rätsel-Rallye | Lösungswort EIMER</title>
+  <meta name="description" content="Löse 5 knifflige Rätsel über QR-Codes und finde das geheime Lösungswort EIMER!">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Animated Background Blobs -->
+  <div class="bg-blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <div id="app">
+    <!-- Header with Letter Tracker -->
+    <header>
+      <div class="brand-container" id="navHome">
+        <div class="brand-icon">🧩</div>
+        <div>
+          <div class="brand-title">QR-Rätsel Rallye</div>
+          <div style="font-size: 0.75rem; color: var(--text-muted);">Sammle die 5 Buchstaben!</div>
+        </div>
+      </div>
+
+      <!-- Secret Word "E I M E R" Progress -->
+      <div class="word-tracker" id="wordTracker">
+        <div class="letter-box" id="box-1" title="Rätsel 1: Mathe (E)">
+          <span class="index-badge">1</span>
+          <span class="letter-val">?</span>
+        </div>
+        <div class="letter-box" id="box-2" title="Rätsel 2: Geschichte (I)">
+          <span class="index-badge">2</span>
+          <span class="letter-val">?</span>
+        </div>
+        <div class="letter-box" id="box-3" title="Rätsel 3: Englisch (M)">
+          <span class="index-badge">3</span>
+          <span class="letter-val">?</span>
+        </div>
+        <div class="letter-box" id="box-4" title="Rätsel 4: Schauspieler (E)">
+          <span class="index-badge">4</span>
+          <span class="letter-val">?</span>
+        </div>
+        <div class="letter-box" id="box-5" title="Rätsel 5: Erdkunde (R)">
+          <span class="index-badge">5</span>
+          <span class="letter-val">?</span>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="nav-buttons">
+        <button class="btn btn-glass" id="btnShowHub">
+          📱 QR-Codes Hub
+        </button>
+        <button class="btn btn-glass" id="btnReset" style="padding: 0.7rem;" title="Fortschritt zurücksetzen">
+          🔄
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <!-- VIEW: QR CODE HUB / ADMIN OVERVIEW -->
+      <section id="view-hub" class="view-panel glass-card">
+        <div class="puzzle-header">
+          <div>
+            <div class="puzzle-tag">Übersicht</div>
+            <h1 class="puzzle-title">📱 5 QR-Code Rätsel-Karten</h1>
+          </div>
+          <button class="btn btn-primary" onclick="window.print()">
+            🖨️ Karten ausdrucken
+          </button>
+        </div>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.6;">
+          Scanne die folgenden QR-Codes mit deinem Smartphone oder klicke auf eine Karte, um das jeweilige Rätsel aufzurufen. Jedes gelöste Rätsel schaltet einen Buchstaben frei!
+        </p>
+
+        <!-- Smartphone Wi-Fi Configuration Bar -->
+        <div style="background: rgba(99, 102, 241, 0.12); border: 1px solid var(--accent-indigo); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 2rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;">
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <div style="font-size: 1.5rem;">📡</div>
+            <div>
+              <strong style="color: #fff; font-size: 0.95rem;">WLAN-Adresse für Smartphones:</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">Damit Handys im selben WLAN die QR-Codes öffnen können:</div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 0.5rem; flex: 1; max-width: 450px; min-width: 280px;">
+            <input type="text" id="ipAddressInput" class="input-field" value="https://gubifn283.github.io/qr-raetsel-eimer" style="padding: 0.6rem 1rem; font-size: 0.9rem;" placeholder="z.B. https://gubifn283.github.io/qr-raetsel-eimer">
+            <button class="btn btn-primary" id="btnUpdateQR" style="padding: 0.6rem 1.2rem; font-size: 0.85rem; white-space: nowrap;">
+              QR-Codes neu laden
+            </button>
+          </div>
+        </div>
+
+        <div class="qr-grid" id="qrGrid">
+          <!-- Rendered dynamically by app.js -->
+        </div>
+      </section>
+
+      <!-- VIEW: PUZZLE 1 (MATHE - QUADRATISCHE FUNKTIONEN -> E) -->
+      <section id="view-p1" class="view-panel glass-card">
+        <div class="puzzle-header">
+          <div>
+            <div class="puzzle-tag">Rätsel 1 von 5 • Mathematik</div>
+            <h1 class="puzzle-title">📐 Die Wurfparabel & Scheitelpunkt</h1>
+          </div>
+          <div class="reward-badge">
+            Gewinn: <span class="reward-letter">E</span>
+          </div>
+        </div>
+
+        <div class="math-container">
+          <div>
+            <p style="color: var(--text-muted); font-size: 1.05rem; line-height: 1.7; margin-bottom: 1.25rem;">
+              Ein Basketball wird geworfen. Seine Flugbahn lässt sich durch die quadratische Funktion 
+              <strong style="color: #60a5fa; font-size: 1.2rem; display: block; margin: 0.5rem 0;">
+                \( f(x) = -x^2 + 6x - 5 \)
+              </strong> 
+              beschreiben, wobei \(x\) die horizontale Entfernung und \(f(x)\) die Höhe darstellt.
+            </p>
+
+            <div style="background: rgba(0,0,0,0.25); padding: 1.2rem; border-radius: var(--radius-md); margin-bottom: 1.5rem; border-left: 4px solid var(--accent-cyan);">
+              <h4 style="color: #38bdf8; margin-bottom: 0.5rem;">Aufgabe:</h4>
+              <p style="line-height: 1.5;">
+                1. Berechne die <strong>maximale Höhe</strong> (die y-Koordinate des Scheitelpunkts \(S\)).<br>
+                2. Berechne die <strong>Landestelle</strong> (die größere der beiden Nullstellen \(x_2\)).
+              </p>
+            </div>
+
+            <form id="formMath" onsubmit="return false;">
+              <div class="input-group">
+                <label class="input-label" for="mathY">1. Maximale Höhe \(y_s\):</label>
+                <input type="number" id="mathY" class="input-field" placeholder="Zahl eingeben (z.B. 4)" required>
+              </div>
+
+              <div class="input-group">
+                <label class="input-label" for="mathX">2. Landestelle \(x_2\):</label>
+                <input type="number" id="mathX" class="input-field" placeholder="Zahl eingeben (z.B. 5)" required>
+              </div>
+
+              <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">
+                Antwort prüfen & Buchstabe freischalten
+              </button>
+            </form>
+
+            <div id="feedbackMath" class="feedback-box"></div>
+          </div>
+
+          <!-- Interactive Math Plotter Canvas -->
+          <div class="math-canvas-wrapper">
+            <h4 style="margin-bottom: 0.75rem; color: var(--text-muted); font-size: 0.9rem;">Funktionsgraph \(f(x) = -x^2 + 6x - 5\)</h4>
+            <canvas id="mathCanvas" width="340" height="260"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW: PUZZLE 2 (GESCHICHTE - VERSAILLER VERTRAG -> I) -->
+      <section id="view-p2" class="view-panel glass-card">
+        <div class="puzzle-header">
+          <div>
+            <div class="puzzle-tag">Rätsel 2 von 5 • Geschichte</div>
+            <h1 class="puzzle-title">📜 Der Versailler Vertrag (1919)</h1>
+          </div>
+          <div class="reward-badge">
+            Gewinn: <span class="reward-letter">I</span>
+          </div>
+        </div>
+
+        <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 1.5rem;">
+          Der Friedensvertrag von Versailles besiegelte das Ende des Ersten Weltkriegs. Beantworte die drei historischen Fragen korrekt:
+        </p>
+
+        <form id="formHistory" onsubmit="return false;">
+          <div class="input-group">
+            <label class="input-label">1. In welchem Jahr wurde der Versailler Vertrag unterzeichnet?</label>
+            <input type="number" id="histYear" class="input-field" placeholder="Jahreszahl (z.B. 1919)" required>
+          </div>
+
+          <div class="input-group">
+            <label class="input-label">2. In welchem berühmten Saal des Schlosses von Versailles fand die Unterzeichnung statt?</label>
+            <select id="histHall" class="input-field" required>
+              <option value="">-- Bitte wählen --</option>
+              <option value="marmorsaal">Der Marmorsaal</option>
+              <option value="spiegelsaal">Der Spiegelsaal (Galerie des Glaces)</option>
+              <option value="herkulessaal">Der Herkulessaal</option>
+              <option value="königssaal">Der Königssaal</option>
+            </select>
+          </div>
+
+          <div class="input-group">
+            <label class="input-label">3. Welcher berüchtigte Artikel wies Deutschland die alleinige Kriegsschuld zu?</label>
+            <input type="text" id="histArticle" class="input-field" placeholder="z.B. Artikel 231 oder 231" required>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">
+            Geschichte prüfen & Buchstabe freischalten
+          </button>
+        </form>
+
+        <div id="feedbackHistory" class="feedback-box"></div>
+      </section>
+
+      <!-- VIEW: PUZZLE 3 (ENGLISCH - TENSES -> M) -->
+      <section id="view-p3" class="view-panel glass-card">
+        <div class="puzzle-header">
+          <div>
+            <div class="puzzle-tag">Rätsel 3 von 5 • Englisch</div>
+            <h1 class="puzzle-title">🇬🇧 English Tenses & Grammar</h1>
+          </div>
+          <div class="reward-badge">
+            Gewinn: <span class="reward-letter">M</span>
+          </div>
+        </div>
+
+        <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 1.5rem;">
+          Put the verbs in brackets into the correct tense (Simple Past, Present Perfect, or Past Perfect):
+        </p>
+
+        <form id="formEnglish" onsubmit="return false;">
+          <div style="background: rgba(0,0,0,0.3); padding: 1.5rem; border-radius: var(--radius-md); margin-bottom: 1.5rem; line-height: 2;">
+            Yesterday evening, Tom 
+            <input type="text" id="eng1" class="input-field" style="width: 140px; display: inline-block; padding: 0.4rem 0.8rem;" placeholder="(arrive)" required> 
+            at the cinema. But his friends were not there yet. They 
+            <input type="text" id="eng2" class="input-field" style="width: 160px; display: inline-block; padding: 0.4rem 0.8rem;" placeholder="(miss)" required> 
+            the bus five minutes earlier! Tom has lived in London since 2018, so he 
+            <input type="text" id="eng3" class="input-field" style="width: 150px; display: inline-block; padding: 0.4rem 0.8rem;" placeholder="(see)" required> 
+            many great movies in his life.
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%;">
+            Check Grammar & Unlock Letter
+          </button>
+        </form>
+
+        <div id="feedbackEnglish" class="feedback-box"></div>
+      </section>
+
+      <!-- VIEW: PUZZLE 4 (ACTOR GUESS - TOM HOLLAND -> E) -->
+      <section id="view-p4" class="view-panel glass-card">
+        <div class="puzzle-header">
+          <div>
+            <div class="puzzle-tag">Rätsel 4 von 5 • Popkultur</div>
+            <h1 class="puzzle-title">🎬 Guess the Actor!</h1>
+          </div>
+          <div class="reward-badge">
+            Gewinn: <span class="reward-letter">E</span>
+          </div>
+        </div>
+
+        <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 1rem;">
+          Wer ist dieser berühmte Hollywood-Schauspieler? Lies die 4 Hinweise:
+        </p>
+
+        <div class="clue-grid">
+          <div class="clue-card">
+            <div class="clue-number">1</div>
+            <div>
+              <strong style="color: #fff;">Geburtsort & Jahr:</strong>
+              <div style="color: var(--text-muted); font-size: 0.9rem;">Geboren 1996 in Kingston upon Thames, England.</div>
+            </div>
+          </div>
+
+          <div class="clue-card">
+            <div class="clue-number">2</div>
+            <div>
+              <strong style="color: #fff;">Erste große Rolle:</strong>
+              <div style="color: var(--text-muted); font-size: 0.9rem;">Spielte die Hauptrolle im Musical <em>Billy Elliot</em> im Londoner West End.</div>
+            </div>
+          </div>
+
+          <div class="clue-card">
+            <div class="clue-number">3</div>
+            <div>
+              <strong style="color: #fff;">Weltberühmter Marvel-Held:</strong>
+              <div style="color: var(--text-muted); font-size: 0.9rem;">Weltweit bekannt als <strong>Spider-Man / Peter Parker</strong> im MCU.</div>
+            </div>
+          </div>
+
+          <div class="clue-card">
+            <div class="clue-number">4</div>
+            <div>
+              <strong style="color: #fff;">Weitere Hits:</strong>
+              <div style="color: var(--text-muted); font-size: 0.9rem;">Verkörperte Nathan Drake in der Videospiel-Verfilmung <em>Uncharted</em>.</div>
+            </div>
+          </div>
+        </div>
+
+        <form id="formActor" onsubmit="return false;" style="margin-top: 1.5rem;">
+          <div class="input-group">
+            <label class="input-label" for="actorName">Wie heißt der Schauspieler? (Vor- und Nachname)</label>
+            <input type="text" id="actorName" class="input-field" placeholder="z.B. Tom Holland" required>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%;">
+            Schauspieler prüfen & Buchstabe freischalten
+          </button>
+        </form>
+
+        <div id="feedbackActor" class="feedback-box"></div>
+      </section>
+
+      <!-- VIEW: PUZZLE 5 (ERDKUNDE - 10 EUROPA LÄNDER -> R) -->
+      <section id="view-p5" class="view-panel glass-card">
+        <div class="puzzle-header">
+          <div>
+            <div class="puzzle-tag">Rätsel 5 von 5 • Erdkunde</div>
+            <h1 class="puzzle-title">🌍 10 Länder in Europa nennen</h1>
+          </div>
+          <div class="reward-badge">
+            Gewinn: <span class="reward-letter">R</span>
+          </div>
+        </div>
+
+        <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 1.25rem;">
+          Tippe nacheinander <strong>10 verschiedene europäische Länder</strong> ein. Sobald du 10 gültige Staaten gefunden hast, wird der letzte Buchstabe freigeschaltet!
+        </p>
+
+        <form id="formGeo" onsubmit="return false;" style="display: flex; gap: 0.75rem;">
+          <input type="text" id="geoInput" class="input-field" placeholder="Land eingeben (z.B. Deutschland, Frankreich, Schweden...)" autocomplete="off">
+          <button type="submit" class="btn btn-primary" style="white-space: nowrap;">
+            + Hinzufügen
+          </button>
+        </form>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem;">
+          <div style="font-weight: 700; color: var(--text-muted);" id="countryCountText">
+            Gefundene Länder: <span id="geoCount" style="color: var(--accent-cyan); font-size: 1.2rem;">0</span> / 10
+          </div>
+          <button class="btn btn-glass" id="btnClearGeo" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;">
+            Zurücksetzen
+          </button>
+        </div>
+
+        <div class="country-tags" id="countryTags">
+          <!-- Added country chips appear here -->
+        </div>
+
+        <div id="feedbackGeo" class="feedback-box"></div>
+      </section>
+
+      <!-- VIEW: GRAND VICTORY / SOLUTION UNLOCKED -->
+      <section id="view-victory" class="view-panel glass-card" style="text-align: center; padding: 4rem 2rem;">
+        <div style="font-size: 5rem; margin-bottom: 1rem;">🎉🏆✨</div>
+        <h1 style="font-family: var(--font-heading); font-size: 3rem; font-weight: 900; background: linear-gradient(135deg, #fbbf24, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+          HERZLICHEN GLÜCKWUNSCH!
+        </h1>
+        <p style="color: var(--text-muted); font-size: 1.2rem; margin: 1rem 0 2rem 0;">
+          Du hast alle 5 Rätsel erfolgreich gelöst und alle Buchstaben gesammelt!
+        </p>
+
+        <div style="background: rgba(0,0,0,0.4); border: 2px solid var(--accent-amber); border-radius: var(--radius-xl); padding: 2.5rem; display: inline-block; max-width: 450px; width: 100%; box-shadow: 0 0 40px rgba(245, 158, 11, 0.3);">
+          <div style="text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-amber); font-size: 0.9rem; font-weight: 700; margin-bottom: 0.5rem;">
+            Das gesuchte Lösungswort lautet:
+          </div>
+          <div style="font-family: var(--font-heading); font-size: 4.5rem; font-weight: 900; color: #ffffff; letter-spacing: 0.25em; text-shadow: 0 0 20px rgba(255,255,255,0.6);">
+            EIMER
+          </div>
+        </div>
+
+        <div style="margin-top: 3rem;">
+          <button class="btn btn-primary" onclick="app.showView('hub')">
+            📱 Zurück zur QR-Code Übersicht
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      QR-Code Rätsel-Rallye • Erstellt für das Lösungswort "EIMER"
+    </footer>
+  </div>
+
+  <!-- Letter Unlock Celebration Modal -->
+  <div class="modal-overlay" id="unlockModal">
+    <div class="modal-content">
+      <div class="unlock-sparkle">⭐</div>
+      <h2 style="font-family: var(--font-heading); font-size: 1.8rem; font-weight: 800; color: #fff;">
+        RÄTSEL GELÖST!
+      </h2>
+      <p style="color: var(--text-muted); margin-top: 0.5rem;">
+        Du hast folgenden Buchstaben freigeschaltet:
+      </p>
+
+      <div class="unlocked-letter-giant" id="modalLetter">E</div>
+
+      <div style="color: #6ee7b7; font-weight: 600; font-size: 0.95rem; margin-bottom: 1.5rem;" id="modalPuzzleNum">
+        Buchstabe 1 von 5 gesammelt
+      </div>
+
+      <button class="btn btn-primary" id="btnCloseModal" style="width: 100%;">
+        Weiter geht's!
+      </button>
+    </div>
+  </div>
+
+  <!-- QR Code Generator Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <!-- Canvas Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <!-- Main Application Logic -->
+  <script src="app.js"></script>
+</body>
+</html>
