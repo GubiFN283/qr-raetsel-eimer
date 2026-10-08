@@ -3,9 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <title>QR-Code Rätsel-Rallye | Lösungswort EIMER</title>
   <meta name="description" content="Löse 5 knifflige Rätsel über QR-Codes und finde das geheime Lösungswort EIMER!">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=2.0">
 </head>
 <body>
 
@@ -101,12 +104,12 @@
         </div>
       </section>
 
-      <!-- VIEW: PUZZLE 1 (MATHE - QUADRATISCHE FUNKTIONEN) -->
+      <!-- VIEW: PUZZLE 1 (MATHE - LINEARE FUNKTION) -->
       <section id="view-p1" class="view-panel glass-card">
         <div class="puzzle-header">
           <div>
             <div class="puzzle-tag">Rätsel 1 von 5 • Mathematik</div>
-            <h1 class="puzzle-title">📐 Der Höchstpunkt einer Parabel</h1>
+            <h1 class="puzzle-title">📐 Lineare Funktion berechnen</h1>
           </div>
           <div class="reward-badge">
             Gewinn: <span class="reward-letter">🔒 ?</span>
@@ -116,23 +119,23 @@
         <div class="math-container">
           <div>
             <p style="color: var(--text-muted); font-size: 1.05rem; line-height: 1.7; margin-bottom: 1.25rem;">
-              Gegeben ist die einfache quadratische Funktion:
-              <strong style="color: #60a5fa; font-size: 1.3rem; display: block; margin: 0.5rem 0;">
-                \( f(x) = -x^2 + 9 \)
+              Gegeben ist die einfache lineare Funktion:
+              <strong style="color: #60a5fa; font-size: 1.4rem; display: block; margin: 0.5rem 0;">
+                \( f(x) = 2x + 4 \)
               </strong> 
             </p>
 
             <div style="background: rgba(0,0,0,0.25); padding: 1.2rem; border-radius: var(--radius-md); margin-bottom: 1.5rem; border-left: 4px solid var(--accent-cyan);">
               <h4 style="color: #38bdf8; margin-bottom: 0.5rem;">Aufgabe:</h4>
               <p style="line-height: 1.5;">
-                Wie hoch ist der <strong>Höchstpunkt (Scheitelpunkt)</strong> der Parabel auf der y-Achse?
+                Setze \(x = 3\) in die Funktion ein und berechne den Funktionswert \(f(3)\).
               </p>
             </div>
 
             <form id="formMath" onsubmit="return false;">
               <div class="input-group">
-                <label class="input-label" for="mathY">Höchstpunkt (y-Wert):</label>
-                <input type="number" id="mathY" class="input-field" placeholder="Zahl eingeben..." required>
+                <label class="input-label" for="mathY">Ergebnis für \(f(3)\):</label>
+                <input type="number" id="mathY" class="input-field" placeholder="Ergebnis eingeben..." required>
               </div>
 
               <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">
@@ -145,18 +148,18 @@
 
           <!-- Interactive Math Plotter Canvas -->
           <div class="math-canvas-wrapper">
-            <h4 style="margin-bottom: 0.75rem; color: var(--text-muted); font-size: 0.9rem;">Funktionsgraph \(f(x) = -x^2 + 9\)</h4>
+            <h4 style="margin-bottom: 0.75rem; color: var(--text-muted); font-size: 0.9rem;">Funktionsgraph \(f(x) = 2x + 4\)</h4>
             <canvas id="mathCanvas" width="340" height="260"></canvas>
           </div>
         </div>
       </section>
 
-      <!-- VIEW: PUZZLE 2 (GESCHICHTE - VERSAILLER VERTRAG) -->
+      <!-- VIEW: PUZZLE 2 (GESCHICHTE - VERSAILLER VERTRAG EINZIGE FRAGE) -->
       <section id="view-p2" class="view-panel glass-card">
         <div class="puzzle-header">
           <div>
             <div class="puzzle-tag">Rätsel 2 von 5 • Geschichte</div>
-            <h1 class="puzzle-title">📜 Der Versailler Vertrag (1919)</h1>
+            <h1 class="puzzle-title">📜 Der Versailler Vertrag</h1>
           </div>
           <div class="reward-badge">
             Gewinn: <span class="reward-letter">🔒 ?</span>
@@ -164,18 +167,13 @@
         </div>
 
         <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 1.5rem;">
-          Der Friedensvertrag von Versailles besiegelte das Ende des Ersten Weltkriegs. Beantworte die zwei historischen Fragen korrekt:
+          Der Friedensvertrag von Versailles beendete den Ersten Weltkrieg. Beantworte die historische Frage:
         </p>
 
         <form id="formHistory" onsubmit="return false;">
           <div class="input-group">
-            <label class="input-label">1. In welchem Jahr wurde der Versailler Vertrag unterzeichnet?</label>
+            <label class="input-label" for="histYear">In welchem Jahr wurde der Versailler Vertrag unterzeichnet?</label>
             <input type="number" id="histYear" class="input-field" placeholder="Jahreszahl eingeben..." required>
-          </div>
-
-          <div class="input-group">
-            <label class="input-label">2. Welcher berüchtigte Artikel wies Deutschland die alleinige Kriegsschuld zu?</label>
-            <input type="text" id="histArticle" class="input-field" placeholder="Artikelnummer eingeben..." required>
           </div>
 
           <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">
@@ -186,7 +184,7 @@
         <div id="feedbackHistory" class="feedback-box"></div>
       </section>
 
-      <!-- VIEW: PUZZLE 3 (ENGLISCH - TENSES) -->
+      <!-- VIEW: PUZZLE 3 (ENGLISCH - KLARER & EINFACHER TEXT) -->
       <section id="view-p3" class="view-panel glass-card">
         <div class="puzzle-header">
           <div>
@@ -199,16 +197,16 @@
         </div>
 
         <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 1.5rem;">
-          Put the verbs in brackets into the Simple Past (Vergangenheit):
+          Setze die beiden Verben in Klammern in die Vergangenheit (Simple Past):
         </p>
 
         <form id="formEnglish" onsubmit="return false;">
-          <div style="background: rgba(0,0,0,0.3); padding: 1.5rem; border-radius: var(--radius-md); margin-bottom: 1.5rem; line-height: 2.2;">
+          <div style="background: rgba(0,0,0,0.3); padding: 1.5rem; border-radius: var(--radius-md); margin-bottom: 1.5rem; line-height: 2.2; font-size: 1.1rem;">
             Yesterday, Tom 
-            <input type="text" id="eng1" class="input-field" style="width: 140px; display: inline-block; padding: 0.4rem 0.8rem;" placeholder="(go)" required> 
-            to school and 
-            <input type="text" id="eng2" class="input-field" style="width: 150px; display: inline-block; padding: 0.4rem 0.8rem;" placeholder="(play)" required> 
-            football with his friends.
+            <input type="text" id="eng1" class="input-field" style="width: 130px; display: inline-block; padding: 0.4rem 0.8rem;" placeholder="(go)" required> 
+            to the cinema and 
+            <input type="text" id="eng2" class="input-field" style="width: 150px; display: inline-block; padding: 0.4rem 0.8rem;" placeholder="(watch)" required> 
+            a movie.
           </div>
 
           <button type="submit" class="btn btn-primary" style="width: 100%;">
@@ -219,7 +217,7 @@
         <div id="feedbackEnglish" class="feedback-box"></div>
       </section>
 
-      <!-- VIEW: PUZZLE 4 (ACTOR GUESS) -->
+      <!-- VIEW: PUZZLE 4 (ACTOR GUESS - KNIFFLIGER 3. TIPP) -->
       <section id="view-p4" class="view-panel glass-card">
         <div class="puzzle-header">
           <div>
@@ -248,23 +246,23 @@
             <div class="clue-number">2</div>
             <div>
               <strong style="color: #fff;">Erste große Rolle:</strong>
-              <div style="color: var(--text-muted); font-size: 0.9rem;">Spielte die Hauptrolle im Musical <em>Billy Elliot</em> im Londoner West End.</div>
+              <div style="color: var(--text-muted); font-size: 0.9rem;">Spielte als Teenager die Hauptrolle im Musical <em>Billy Elliot</em> im Londoner West End.</div>
             </div>
           </div>
 
           <div class="clue-card">
             <div class="clue-number">3</div>
             <div>
-              <strong style="color: #fff;">Bekannter Anzug-Held:</strong>
-              <div style="color: var(--text-muted); font-size: 0.9rem;">Bekannt für seine akrobatischen Stunts in einem roten Anzug an der Seite von Zendaya.</div>
+              <strong style="color: #fff;">Spektakuläre Bewerbung:</strong>
+              <div style="color: var(--text-muted); font-size: 0.9rem;">Reichte 2015 ein Selbst-Video mit Akrobatik-Saltos ein, um Regisseure für eine geheime Rolle zu überzeugen.</div>
             </div>
           </div>
 
           <div class="clue-card">
             <div class="clue-number">4</div>
             <div>
-              <strong style="color: #fff;">Weitere Hits:</strong>
-              <div style="color: var(--text-muted); font-size: 0.9rem;">Verkörperte Schatzsucher Nathan Drake im Film <em>Uncharted</em>.</div>
+              <strong style="color: #fff;">Bekannter Kinofilm:</strong>
+              <div style="color: var(--text-muted); font-size: 0.9rem;">Verkörperte den jungen Schatzsucher Nathan Drake im Actionfilm <em>Uncharted</em>.</div>
             </div>
           </div>
         </div>
@@ -383,6 +381,6 @@
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
   <!-- Main Application Logic -->
-  <script src="app.js"></script>
+  <script src="app.js?v=2.0"></script>
 </body>
 </html>
